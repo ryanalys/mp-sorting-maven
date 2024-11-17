@@ -10,6 +10,7 @@ import java.util.Arrays;
  *   The types of values that are sorted.
  *
  * @author Samuel A. Rebelsky
+ * @author Alyssa Ryan
  */
 
 public class MergeSorter<T> implements Sorter<T> {
@@ -56,11 +57,11 @@ public class MergeSorter<T> implements Sorter<T> {
    */
   @Override
   public void sort(T[] values) {
-    if(values.length > 1) {
+    if (values.length > 1) {
       int mid = (values.length) / 2;
       T[] leftArr = Arrays.copyOfRange(values, 0, mid);
       T[] rightArr = Arrays.copyOfRange(values, mid, values.length);
-      
+
       sort(leftArr);
       sort(rightArr);
 
@@ -68,21 +69,21 @@ public class MergeSorter<T> implements Sorter<T> {
       int right = 0;
       int index = 0;
 
-      while(left < leftArr.length && right<rightArr.length) {
-        if(order.compare(leftArr[left], rightArr[right]) < 0) {
+      while (left < leftArr.length && right < rightArr.length) {
+        if (order.compare(leftArr[left], rightArr[right]) < 0) {
           values[index++] = leftArr[left++];
         } else {
           values[index++] = rightArr[right++];
-       } //if/else
-      }
+        } //if/else
+      } //while
 
-      while(left < leftArr.length) {
+      while (left < leftArr.length) {
         values[index++] = leftArr[left++];
-      }
+      } //while
 
-      while(right < rightArr.length) {
+      while (right < rightArr.length) {
         values[index++] = rightArr[right++];
-      }
+      } //while
     } //if
   } // sort(T[])
 } // class MergeSorter

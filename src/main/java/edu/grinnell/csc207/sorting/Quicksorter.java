@@ -11,6 +11,7 @@ import java.util.Random;
  *   The types of values that are sorted.
  *
  * @author Samuel A. Rebelsky
+ * @author Alyssa Ryan
  */
 
 public class Quicksorter<T> implements Sorter<T> {
@@ -57,10 +58,10 @@ public class Quicksorter<T> implements Sorter<T> {
    */
   @Override
   public void sort(T[] values) {
-    if(values.length > 1) {
+    if (values.length > 1) {
       Random rand = new Random();
-      int pivot_num = rand.nextInt(values.length);
-      T pivot = values[pivot_num];
+      int pivotNum = rand.nextInt(values.length);
+      T pivot = values[pivotNum];
       int mid = (values.length) / 2;
       T[] leftArr = Arrays.copyOfRange(values, 0, mid);
       T[] rightArr = Arrays.copyOfRange(values, mid, values.length);
@@ -69,19 +70,19 @@ public class Quicksorter<T> implements Sorter<T> {
       int right = 0;
       int index = 0;
 
-      while(index < values.length && left < leftArr.length && right < rightArr.length) {
-        if(order.compare(values[index], pivot) < 0) {
+      while (index < values.length && left < leftArr.length && right < rightArr.length) {
+        if (order.compare(values[index], pivot) < 0) {
           leftArr[left++] = values[index++];
         } else {
           rightArr[right++] = values[index++];
         } //if/else
       } //while
 
-      while(left < leftArr.length && index < values.length) {
+      while (left < leftArr.length && index < values.length) {
         leftArr[left++] = values[index++];
       } //while
 
-      while(right < rightArr.length && index < values.length) {
+      while (right < rightArr.length && index < values.length) {
         rightArr[right++] = values[index++];
       } //while
 
@@ -92,19 +93,19 @@ public class Quicksorter<T> implements Sorter<T> {
       right = 0;
       index = 0;
 
-      while(left < leftArr.length && right<rightArr.length) {
-        if(order.compare(leftArr[left], rightArr[right]) < 0) {
+      while (left < leftArr.length && right < rightArr.length) {
+        if (order.compare(leftArr[left], rightArr[right]) < 0) {
           values[index++] = leftArr[left++];
         } else {
           values[index++] = rightArr[right++];
-       } //if/else
+        } //if/else
       } //while
 
-      while(left < leftArr.length) {
+      while (left < leftArr.length) {
         values[index++] = leftArr[left++];
       } //while
 
-      while(right < rightArr.length) {
+      while (right < rightArr.length) {
         values[index++] = rightArr[right++];
       } //while
     } //if

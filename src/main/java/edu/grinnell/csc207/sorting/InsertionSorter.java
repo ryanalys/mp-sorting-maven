@@ -9,6 +9,7 @@ import java.util.Comparator;
  *   The types of values that are sorted.
  *
  * @author Samuel A. Rebelsky
+ * @author Alyssa Ryan
  */
 
 public class InsertionSorter<T> implements Sorter<T> {
@@ -55,12 +56,12 @@ public class InsertionSorter<T> implements Sorter<T> {
    */
   @Override
   public void sort(T[] values) {
-    for(int i = 1; i < values.length; i++) {
+    for (int i = 1; i < values.length; i++) {
       int position = i;
-      while (position > 0 && order.compare(values[position], values[position-1]) < 0) {
+      while (position > 0 && order.compare(values[position], values[position - 1]) < 0) {
         T current = values[position];
-        values[position] = values[position-1];
-        values[position-1] = current;
+        values[position] = values[position - 1];
+        values[position - 1] = current;
         position--;
       } //while
     } //for
