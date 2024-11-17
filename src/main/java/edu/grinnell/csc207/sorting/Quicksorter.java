@@ -1,6 +1,8 @@
 package edu.grinnell.csc207.sorting;
 
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Random;
 
 /**
  * Something that sorts using Quicksort.
@@ -55,6 +57,56 @@ public class Quicksorter<T> implements Sorter<T> {
    */
   @Override
   public void sort(T[] values) {
-    // STUB
+    if(values.length > 1) {
+      Random rand = new Random();
+      int pivot_num = rand.nextInt(values.length);
+      T pivot = values[pivot_num];
+      int mid = (values.length) / 2;
+      T[] leftArr = Arrays.copyOfRange(values, 0, mid);
+      T[] rightArr = Arrays.copyOfRange(values, mid, values.length);
+
+      int left = 0;
+      int right = 0;
+      int index = 0;
+
+      while(index < values.length && left < leftArr.length && right < rightArr.length) {
+        if(order.compare(values[index], pivot) < 0) {
+          leftArr[left++] = values[index++];
+        } else {
+          rightArr[right++] = values[index++];
+        } //if/else
+      } //while
+
+      while(left < leftArr.length && index < values.length) {
+        leftArr[left++] = values[index++];
+      } //while
+
+      while(right < rightArr.length && index < values.length) {
+        rightArr[right++] = values[index++];
+      } //while
+
+      sort(leftArr);
+      sort(rightArr);
+
+      left = 0;
+      right = 0;
+      index = 0;
+
+      while(left < leftArr.length && right<rightArr.length) {
+        if(order.compare(leftArr[left], rightArr[right]) < 0) {
+          values[index++] = leftArr[left++];
+        } else {
+          values[index++] = rightArr[right++];
+       } //if/else
+      } //while
+
+      while(left < leftArr.length) {
+        values[index++] = leftArr[left++];
+      } //while
+
+      while(right < rightArr.length) {
+        values[index++] = rightArr[right++];
+      } //while
+    } //if
   } // sort(T[])
 } // class Quicksorter
