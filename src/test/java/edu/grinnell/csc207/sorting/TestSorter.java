@@ -120,4 +120,69 @@ public class TestSorter {
     ArrayUtils.permute(original);
     assertSorts(expected, original, intSorter);
   } // permutedIntegers
+
+
+  /**
+   * Ensures an array that is one element long is sorted correctly
+   */
+  @Test
+  public void singleElementTest() {
+    Integer[] expected = {1};
+    Integer[] permuted = {1};
+    assertSorts(expected, permuted, intSorter);
+  } //singleElementTest
+
+  /**
+   * Ensures we can sort an array that is multiple elements long
+   */
+  @Test
+  public void multipleElementsTest() {
+    Integer[] expected = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    Integer[] permuted = expected.clone();
+    ArrayUtils.permute(permuted);
+    assertSorts(expected, permuted, intSorter);
+  } //multipleElementsTest
+
+  /**
+   * Ensures an array with two of the same elements sorts correctly
+   */
+  @Test
+  public void hasDuplicateElement() {
+    Integer[] expected = {0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    Integer[] permuted = expected.clone();
+    ArrayUtils.permute(permuted);
+    assertSorts(expected, permuted, intSorter);
+  } //hasDuplicateElement
+
+  /**
+   * Ensures an array with multiple sets of duplicate elements sorts correctly
+   */
+  @Test
+  public void hasMultipleDuplicateElements() {
+    Integer[] expected = new Integer[21];
+    int index = 0;
+    for(int i = 0; i < 6; i++) {
+      for(int j = 0; j < i+1; j++) {
+        expected[index] = i;
+        index++;
+      } //for
+    } //for
+    Integer[] permuted = expected.clone();
+    ArrayUtils.permute(permuted);
+    assertSorts(expected, permuted, intSorter);
+  }
+
+  /**
+   * Ensures a long array is sorted correctly
+   */
+  @Test
+  public void veryLongArray() {
+    Integer[] expected = new Integer[500];
+    for(int i = 0; i < 1000; i+=2) {
+      expected[i/2] = i;
+    } //for
+    Integer[] permuted = expected.clone();
+    ArrayUtils.permute(permuted);
+    assertSorts(expected, permuted, intSorter);
+  } //veryLongArray
 } // class TestSorter
